@@ -1,27 +1,29 @@
+package com.generation.scrum_manager.modelos;
 import java.util.Comparator;
 
-public class Base implements Comparator<Base>{
+public class UserStory implements Comparator<UserStory>{
 	
 	//Atributos
 	private String projeto;
-	private Pessoa responsavel;//scrum master
+	private String responsavel;//scrum master
+	private String especificacao;
 	private String nome; //nome da funcionalidade
 	private String mensagem; //como a funcionalidade manipula os dados
-	private int prioridade; //Nível de dificuldade da user story
+	private int prioridade; //NÃ­vel de dificuldade da user story 1 a 5
 	private int estado; //em qual momento a user story se encontra
 						//( - a fazer, 2 - fazendo, 3 - finalizada/revisar)
 	
-	public Base(String projeto, Pessoa responsavel, String nome, String mensagem, int prioridade, int estado)
+	public UserStory(String projeto, String responsavel, String especificacao, String mensagem, int prioridade, String nome)
 	{
 		this.projeto= projeto;
 		this.responsavel= responsavel;
-		this.nome= nome;
+		this.especificacao = especificacao;
 		this.mensagem= mensagem;
 		this.prioridade= prioridade;
-		this.estado= estado;
+		this.nome = nome;
+
 	}
-	public Base() {
-		
+	public UserStory() {
 	}
 
 	public String getNome() {
@@ -65,29 +67,31 @@ public class Base implements Comparator<Base>{
 		this.projeto = projeto;
 	}
 
-	public Pessoa getResponsavel() {
+	public String getResponsavel() {
 		return responsavel;
 	}
 
-	public void setResponsavel(Pessoa responsavel) {
+	public void setResponsavel(String responsavel) {
 		this.responsavel = responsavel;
+	}
+	
+	public String getEspecificacao() {
+		return especificacao;
+	}
+	public void setEspecificacao(String especificacao) {
+		this.especificacao = especificacao;
 	}
 	
 	public String infoBase()
 	{
-		return "\nProjeto: " +getProjeto()+ "\nResponsável: " +getResponsavel()
-		+ "\nFuncionalidade: " +getNome()+ "\nComo faz: " +getMensagem() + "\nNível de prioridade: " +getPrioridade()
+		return "\nNome: " + getNome() +"\nProjeto: " +getProjeto()+ "\nResponsÃ¡vel: " +getResponsavel()
+		+ "\nFuncionalidade: " +getNome()+ "\nComo faz: " +getMensagem() + "\nNÃ­vel de prioridade: " +getPrioridade()
 		+ "\nEstado: " +getEstado();
 	}
 
 	@Override
-	public int compare(Base o1, Base o2) {
-		if(o1.prioridade > o2.prioridade) {
-			return -1;
-		} else if (o1.prioridade < o2.prioridade){
-			return 1;
-		}
-		else return 0;
+	public int compare(UserStory o1, UserStory o2) {
+		return Integer.compare(o2.prioridade, o1.prioridade);
 	}
 
 }
